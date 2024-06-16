@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "app/(auth)/sign-up.tsx", "constants/icons.js", "constants/images.js", "constants/index.js"  ]
 }
