@@ -20,16 +20,16 @@ const PembimbingCard: React.FC<PembimbingCardProps> = ({
     <View style={styles.card}>
       <View style={styles.row}>
         <Text style={styles.label}>Nama</Text>
-        <Text style={styles.value}>: {nama}</Text>
+        <Text style={styles.value}>:   {nama}</Text>
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>NIP</Text>
-        <Text style={styles.value}>: {nip}</Text>
+        <Text style={styles.value}>:   {nip}</Text>
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>Keahlian</Text>
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.value}>
-          : {keahlian}
+          :   {keahlian}
         </Text>
       </View>
       <View style={[styles.row, styles.marginTop, styles.justifyEnd]}>
@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Bold",
   } as TextStyle,
   value: {
+    flex: 1,
     fontSize: 14,
     fontFamily: "Poppins-Regular",
   } as TextStyle,
