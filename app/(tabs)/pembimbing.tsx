@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import CustomBar from "../../components/CustomBar";
-import { useIsFocused } from "@react-navigation/native";
 import PembimbingCard from "../../components/PembimbingCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -23,7 +22,6 @@ interface PembimbingData {
 }
 
 const Pembimbing: React.FC = () => {
-  const isFocused = useIsFocused();
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
@@ -51,7 +49,7 @@ const Pembimbing: React.FC = () => {
 
   useEffect(() => {
     fetchPembimbing();
-  }, [isFocused]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>

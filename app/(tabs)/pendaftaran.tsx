@@ -2,7 +2,6 @@ import axios from "axios";
 import { images } from "../../constants";
 import { useState, useEffect } from "react";
 import CustomBar from "../../components/CustomBar";
-import { useIsFocused } from "@react-navigation/native";
 import CustomDropdown from "../../components/CustomDropdown";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PembimbingDropdown from "../../components/PembimbingDropdown";
@@ -40,7 +39,6 @@ interface FormData {
 }
 
 const Pendaftaran: React.FC = () => {
-  const isFocused = useIsFocused();
   const [showModal, setShowModal] = useState(false);
   const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
   const [formData, setFormData] = useState<FormData>({
@@ -84,7 +82,7 @@ const Pendaftaran: React.FC = () => {
 
     fetchUserData();
     fetchPembimbings();
-  }, [isFocused]);
+  }, []);
 
   const handleCreateModal = () => {
     setShowModal(true);
@@ -109,6 +107,8 @@ const Pendaftaran: React.FC = () => {
     }
 
     const token = await SecureStore.getItemAsync("token");
+    const nim = await SecureStore.getItemAsync("nim");
+    const nama = await SecureStore.getItemAsync("nama");
 
     try {
       const formattedData = {
@@ -136,8 +136,8 @@ const Pendaftaran: React.FC = () => {
 
       // Reset form state after successful submission
       setFormData({
-        nama: "",
-        nim: "",
+        nama: nama ?? "",
+        nim: nim ?? "",
         judul: "",
         kategori: "",
         pembimbing1: "",
