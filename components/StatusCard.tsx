@@ -69,12 +69,12 @@ const StatusCard: React.FC<StatusCardProps> = ({
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>Tanggal</Text>
-        <Text>: </Text>
+        <Text style={styles.sign}>: </Text>
         <Text style={styles.value}>{date}</Text>
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>Judul TA</Text>
-        <Text>: </Text>
+        <Text style={styles.sign}>: </Text>
         <Text numberOfLines={3} ellipsizeMode="tail" style={styles.title}>
           {title}
         </Text>
@@ -175,7 +175,7 @@ const StatusCard: React.FC<StatusCardProps> = ({
                   <Text style={styles.noteValue}>{data.keterangan}</Text>
                 </View>
                 <Text style={styles.rejectionMessage}>
-                  Maaf, pendaftaran Anda tidak dapat diterima. Silakan
+                  Maaf, pendaftaran Anda tidak memenuhi syarat. Silakan
                   mengajukan pendaftaran kembali.
                 </Text>
               </View>
@@ -217,8 +217,8 @@ const StatusCard: React.FC<StatusCardProps> = ({
                   </TouchableOpacity>
                 </View>
                 <Text style={styles.processingMessage}>
-                  Pendaftaran Anda sedang diproses. Mohon menunggu informasi
-                  lebih lanjut.
+                  Data Anda sedang diverifikasi oleh Koordinator TA. Harap
+                  ditunggu, ya! 😉
                 </Text>
               </View>
             )}
@@ -284,6 +284,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "600",
     width: 72,
+  } as TextStyle,
+  sign: {
+    fontSize: 12,
+    fontWeight: "300",
   } as TextStyle,
   value: {
     fontSize: 12,

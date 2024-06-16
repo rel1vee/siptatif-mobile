@@ -2,6 +2,7 @@ import axios from "axios";
 import { images } from "../../constants";
 import { useState, useEffect } from "react";
 import CustomBar from "../../components/CustomBar";
+import { useIsFocused } from "@react-navigation/native";
 import CustomDropdown from "../../components/CustomDropdown";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PembimbingDropdown from "../../components/PembimbingDropdown";
@@ -39,6 +40,7 @@ interface FormData {
 }
 
 const Pendaftaran: React.FC = () => {
+  const isFocused = useIsFocused();
   const [showModal, setShowModal] = useState(false);
   const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
   const [formData, setFormData] = useState<FormData>({
@@ -82,7 +84,7 @@ const Pendaftaran: React.FC = () => {
 
     fetchUserData();
     fetchPembimbings();
-  }, []);
+  }, [isFocused]);
 
   const handleCreateModal = () => {
     setShowModal(true);

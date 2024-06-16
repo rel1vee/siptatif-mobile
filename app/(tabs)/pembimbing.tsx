@@ -2,9 +2,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import CustomBar from "../../components/CustomBar";
+import { useIsFocused } from "@react-navigation/native";
 import PembimbingCard from "../../components/PembimbingCard";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, FlatList, TextInput, ActivityIndicator, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import {
+  View,
+  FlatList,
+  TextInput,
+  ActivityIndicator,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 
 interface PembimbingData {
   nama: string;
@@ -14,9 +23,10 @@ interface PembimbingData {
 }
 
 const Pembimbing: React.FC = () => {
-  const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const isFocused = useIsFocused();
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
 
   const fetchPembimbing = async () => {
     try {
@@ -41,7 +51,7 @@ const Pembimbing: React.FC = () => {
 
   useEffect(() => {
     fetchPembimbing();
-  }, []);
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -60,8 +70,12 @@ const Pembimbing: React.FC = () => {
         <FlatList
           data={pembimbing.filter(
             (pembimbing) =>
-              pembimbing.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              pembimbing.keahlian.toLowerCase().includes(searchQuery.toLowerCase())
+              pembimbing.nama
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()) ||
+              pembimbing.keahlian
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase())
           )}
           renderItem={({ item }) => (
             <PembimbingCard
@@ -82,22 +96,22 @@ const Pembimbing: React.FC = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   } as ViewStyle,
   searchInput: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     marginVertical: 16,
     marginHorizontal: 24,
-    backgroundColor: 'white',
-    borderColor: '#64748B',
+    backgroundColor: "white",
+    borderColor: "#64748B",
     borderWidth: 1,
     borderRadius: 10,
   } as TextStyle,
   loadingContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   } as ViewStyle,
 });
 

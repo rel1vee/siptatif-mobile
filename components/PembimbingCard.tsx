@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { Text, View, StyleSheet, ViewStyle, TextStyle } from "react-native";
 
 interface PembimbingCardProps {
   nama: string;
@@ -26,15 +20,17 @@ const PembimbingCard: React.FC<PembimbingCardProps> = ({
     <View style={styles.card}>
       <View style={styles.row}>
         <Text style={styles.label}>Nama</Text>
-        <Text style={styles.value}>:   {nama}</Text>
+        <Text style={styles.value}>: {nama}</Text>
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>NIP</Text>
-        <Text style={styles.value}>:   {nip}</Text>
+        <Text style={styles.value}>: {nip}</Text>
       </View>
       <View style={[styles.row, styles.marginTop]}>
         <Text style={styles.label}>Keahlian</Text>
-        <Text style={styles.value}>:   {keahlian}</Text>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.value}>
+          : {keahlian}
+        </Text>
       </View>
       <View style={[styles.row, styles.marginTop, styles.justifyEnd]}>
         <Text style={[styles.status, { backgroundColor: statusColor }]}>
@@ -51,39 +47,39 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     marginBottom: 16,
     marginTop: 4,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderWidth: 1,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    borderColor: '#D1D5DB',
+    borderColor: "#D1D5DB",
   } as ViewStyle,
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   } as ViewStyle,
   label: {
     width: 84,
     fontSize: 14,
-    fontFamily: 'Poppins-Bold',
+    fontFamily: "Poppins-Bold",
   } as TextStyle,
   value: {
     fontSize: 14,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: "Poppins-Regular",
   } as TextStyle,
   marginTop: {
     marginTop: 16,
   } as ViewStyle,
   justifyEnd: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   } as ViewStyle,
   status: {
     fontSize: 12,
-    color: 'white',
-    fontFamily: 'Poppins-Medium',
+    color: "white",
+    fontFamily: "Poppins-Medium",
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,

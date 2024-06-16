@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   link: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#b6b6b6",
     fontFamily: "Poppins-Regular",
   },
   sublink: {
-    fontSize: 18,
+    fontSize: 16,
     textDecorationLine: "underline",
     color: "#00BFFF",
     fontFamily: "Poppins-SemiBold",
