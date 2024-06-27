@@ -1,4 +1,3 @@
-import React from "react";
 import { router } from "expo-router";
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";

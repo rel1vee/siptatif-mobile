@@ -1,4 +1,3 @@
-import React from "react";
 import { Text, View, StyleSheet, ViewStyle, TextStyle } from "react-native";
 
 interface PembimbingCardProps {

@@ -1,5 +1,5 @@
+import { useState } from "react";
 import { icons } from "../constants";
-import React, { useState } from "react";
 import {
   View,
   Text,

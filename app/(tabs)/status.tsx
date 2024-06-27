@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   ViewStyle,
+  Alert,
 } from "react-native";
 
 interface StatusData {
@@ -34,41 +35,55 @@ const Status: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState<StatusData[]>([]);
 
-  const fetchStatus = async () => {
-    try {
-      // Ambil token dan nim dari SecureStore
-      const token = await SecureStore.getItemAsync("token");
-      const nim = await SecureStore.getItemAsync("nim");
-
-      if (nim) {
-        // Menggunakan NIM untuk mengambil data dari REST API
-        const response = await axios.get(
-          `https://siptatif-backend.vercel.app/api/ta/${nim}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setStatus(response.data.data);
-      } else {
-        console.error("NIM tidak ditemukan di SecureStore");
-      }
-    } catch (error) {
-      console.error("Error fetching status:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchStatus = async () => {
+      const nim = await SecureStore.getItemAsync("nim");
+      const token = await SecureStore.getItemAsync("token");
+
+      try {
+        if (nim) {
+          const response = await axios.get(
+            `https://siptatif-backend.vercel.app/api/ta/${nim}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setStatus(response.data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching status:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchStatus();
   }, [isFocused]);
+
+  const handleDelete = async (kode: string) => {
+    const token = await SecureStore.getItemAsync("token");
+    
+    try {
+      await axios.delete(`https://siptatif-backend.vercel.app/api/ta/${kode}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // After successful deletion, update the local state
+      setStatus((prevStatus) =>
+        prevStatus.filter((item) => item.kode !== kode)
+      );
+    } catch (error) {
+      Alert.alert("Error ‼", "Failed to delete item. Please try again.");
+    }
+  };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -95,16 +110,18 @@ const Status: React.FC = () => {
                   : item.status === "Ditolak"
                   ? "red"
                   : "orange"
-              } // Ubah warna berdasarkan status
+              }
               title={item.judul}
+              category={item.kategori}
               bgColor={
                 item.status === "Disetujui"
                   ? "rgb(187 247 208)"
                   : item.status === "Ditolak"
                   ? "rgb(254 202 202)"
                   : "#FFffaa"
-              } // Ubah warna latar belakang berdasarkan status
-              data={item} // Passing seluruh data item ke StatusCard
+              }
+              data={item}
+              onDelete={handleDelete}
             />
           ))
         )}

@@ -51,24 +51,6 @@ const Pendaftaran: React.FC = () => {
     file: "",
   });
 
-  const fetchPembimbings = async () => {
-    const token = await SecureStore.getItemAsync("token");
-
-    try {
-      const response = await axios.get(
-        "https://siptatif-backend.vercel.app/api/dosen",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setPembimbing(response.data.data);
-    } catch (error) {
-      console.error("Error fetching pembimbings:", error);
-    }
-  };
-
   useEffect(() => {
     const fetchUserData = async () => {
       const nim = await SecureStore.getItemAsync("nim");
@@ -78,6 +60,24 @@ const Pendaftaran: React.FC = () => {
         nim: nim ?? "",
         nama: nama ?? "",
       }));
+    };
+
+    const fetchPembimbings = async () => {
+      const token = await SecureStore.getItemAsync("token");
+  
+      try {
+        const response = await axios.get(
+          "https://siptatif-backend.vercel.app/api/dosen",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPembimbing(response.data.data);
+      } catch (error) {
+        console.error("Error fetching pembimbings:", error);
+      }
     };
 
     fetchUserData();
@@ -93,7 +93,6 @@ const Pendaftaran: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    // Validasi input kosong
     if (
       !formData.nim ||
       !formData.nama ||
@@ -147,9 +146,8 @@ const Pendaftaran: React.FC = () => {
 
       setTimeout(() => {
         handleCloseModal();
-      }, 2000);
+      }, 1200);
     } catch (error) {
-      console.error("Error pendaftaran:", error);
       ToastAndroid.show("Pendaftaran gagal ❌", ToastAndroid.LONG);
     }
   };
@@ -170,7 +168,7 @@ const Pendaftaran: React.FC = () => {
 
       <View style={styles.centeredContainer}>
         <Text style={styles.instructionText}>
-          Silakan ajukan pendaftaran TA dengan mengklik tombol di pojok kanan
+          Silakan ajukan pendaftaran TA dengan mengklik tombol + di pojok kanan
           bawah berikut.
         </Text>
       </View>
@@ -213,7 +211,7 @@ const Pendaftaran: React.FC = () => {
                   onValueChange={(itemValue: string) =>
                     handleInputChange("kategori", itemValue)
                   }
-                  placeholder="Pilih Kategori"
+                  placeholder="- Pilih Kategori -"
                 />
               </View>
               <Text style={styles.label}>Pembimbing 1</Text>
@@ -224,7 +222,7 @@ const Pendaftaran: React.FC = () => {
                   onValueChange={(value: string) =>
                     handleInputChange("pembimbing1", value)
                   }
-                  placeholder="Pilih Pembimbing 1"
+                  placeholder="- Pilih Pembimbing 1 -"
                 />
               </View>
               <Text style={styles.label}>Pembimbing 2</Text>
@@ -235,7 +233,7 @@ const Pendaftaran: React.FC = () => {
                   onValueChange={(value: string) =>
                     handleInputChange("pembimbing2", value)
                   }
-                  placeholder="Pilih Pembimbing 2"
+                  placeholder="- Pilih Pembimbing 2 -"
                 />
               </View>
               <Text style={styles.label}>

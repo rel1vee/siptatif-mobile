@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { router } from "expo-router";
 import { images } from "../constants";
-import React, { useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import {
   Text,
@@ -70,18 +70,18 @@ const CustomBar: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#D1D5DB',
+    borderBottomColor: "#D1D5DB",
   } as ViewStyle,
   title: {
     fontSize: 24,
-    color: '#00BFFF',
-    fontFamily: 'Poppins-Bold',
+    color: "#00BFFF",
+    fontFamily: "Poppins-Bold",
   } as TextStyle,
   avatar: {
     width: 40,
@@ -90,26 +90,26 @@ const styles = StyleSheet.create({
   } as ImageStyle,
   modalOverlay: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   } as ViewStyle,
   modalContent: {
-    width: '80%',
+    width: "80%",
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 10,
   } as ViewStyle,
   logoutText: {
     paddingVertical: 8,
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#EF4444',
+    fontSize: 16,
+    textAlign: "center",
+    color: "#EF4444",
   } as TextStyle,
   cancelText: {
     paddingVertical: 8,
-    fontSize: 18,
-    textAlign: 'center',
+    fontSize: 16,
+    textAlign: "center",
   } as TextStyle,
 });
 

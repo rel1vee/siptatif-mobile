@@ -26,28 +26,27 @@ const Pembimbing: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [pembimbing, setPembimbing] = useState<PembimbingData[]>([]);
 
-  const fetchPembimbing = async () => {
-    try {
-      // Ambil token dari SecureStore
-      const token = await SecureStore.getItemAsync("token");
-
-      const response = await axios.get(
-        "https://siptatif-backend.vercel.app/api/dosen",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setPembimbing(response.data.data);
-    } catch (error) {
-      console.error("Error fetching pembimbing:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchPembimbing = async () => {
+      const token = await SecureStore.getItemAsync("token");
+      
+      try {
+        const response = await axios.get(
+          "https://siptatif-backend.vercel.app/api/dosen",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPembimbing(response.data.data);
+      } catch (error) {
+        console.error("Error fetching pembimbing:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchPembimbing();
   }, []);
 

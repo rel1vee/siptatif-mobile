@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, router } from "expo-router";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
@@ -16,17 +16,15 @@ const SignUp = () => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   const handleRegister = async () => {
-    // Validasi input kosong
     if (!form.nama || !form.email || !form.password) {
       ToastAndroid.show("Pastikan setiap form diisi ❕", ToastAndroid.LONG);
       return;
     }
 
-    // Validasi email
     const emailPattern = /^[a-zA-Z0-9._%+-]+@students\.uin-suska\.ac\.id$/;
     if (!emailPattern.test(form.email)) {
       ToastAndroid.show(
-        "Required @students.uin-suska.ac.id ❕",
+        "Required @students.uin-suska.ac.id ❗",
         ToastAndroid.LONG
       );
       return;
@@ -38,16 +36,14 @@ const SignUp = () => {
         "https://siptatif-backend.vercel.app/api/auth/register",
         form
       );
-      // Tampilkan notifikasi berhasil
+
       ToastAndroid.show("Akun berhasil dibuat ✅", ToastAndroid.LONG);
-      // Arahkan ke halaman sign-in setelah berhasil register
+
       setTimeout(() => {
         router.push("/sign-in");
       }, 2000);
     } catch (error) {
-      // Tampilkan pesan error jika ada
-      console.error(error);
-      ToastAndroid.show("Gagal membuat akun ❌", ToastAndroid.LONG);
+      ToastAndroid.show("Maaf, email telah terdaftar ❗", ToastAndroid.LONG);
     } finally {
       setSubmitting(false);
     }

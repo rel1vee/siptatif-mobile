@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { images } from "../../constants";
+import { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
-import React, { useEffect, useState } from "react";
 import CustomBar from "../../components/CustomBar";
 import { View, Text, StyleSheet } from "react-native";
 import CustomSection from "../../components/CustomSection";

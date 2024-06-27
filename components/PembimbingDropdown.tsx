@@ -1,4 +1,3 @@
-import React from "react";
 import CustomDropdown from "./CustomDropdown";
 
 interface Pembimbing {

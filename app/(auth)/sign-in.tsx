@@ -1,6 +1,6 @@
 import axios from "axios";
 import base64 from "base-64";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, router } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import FormField from "../../components/FormField";
@@ -17,7 +17,6 @@ const SignIn = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleLogin = async () => {
-    // Validasi input kosong
     if (!form.email || !form.password) {
       ToastAndroid.show("Isi email dan password ❕", ToastAndroid.LONG);
       return;
@@ -48,7 +47,7 @@ const SignIn = () => {
 
         // Tampilkan notifikasi berhasil
         ToastAndroid.show("Login berhasil ✅", ToastAndroid.LONG);
-        // Arahkan ke halaman beranda setelah berhasil login
+
         setTimeout(() => {
           router.push("/beranda");
         }, 2000);
